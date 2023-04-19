@@ -72,6 +72,7 @@ namespace MulticastChat
         private void btnSend_Click(object sender, EventArgs e)
         {
             //Construct message and convert to bytes
+            //userName the name of the user sending the message
             string message = userName + ": " + txtMessage.Text;
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
 
