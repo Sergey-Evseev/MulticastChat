@@ -68,6 +68,10 @@ namespace MulticastChat
             receiveThread = new Thread(new ThreadStart(ReceiveMessages));
             receiveThread.Start();
         }
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void ReceiveMessages()
         {
@@ -78,8 +82,11 @@ namespace MulticastChat
             while (true)
             {
                 //Receive message from multicast group
-                IPEndPoint remoteEndPoint = new IPEndPoint()
+                IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                byte[] messageBytes = udpClient.Receive(ref remoteEndPoint);
             }
 }
+
+        
     }
 }
