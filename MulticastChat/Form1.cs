@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace MulticastChat
 {
@@ -82,11 +83,29 @@ namespace MulticastChat
             while (true)
             {
                 //Receive message from multicast group
+                //the endpoint will listen for incoming messages from any IP address and any port number.
                 IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                
+                //receives a message sent to the UDP client using the Receive method of the UdpClient class
+                //Receive method blocks the thread until a message is received, and then returns
+                //the received data as a byte array. The ref remoteEndPoint parameter is used to return
+                //the IP endpoint from which the message was received.
                 byte[] messageBytes = udpClient.Receive(ref remoteEndPoint);
-            }
-}
 
-        
-    }
-}
+                //Convert message to string
+                string message = Encoding.ASCII.GetString(messageBytes);
+
+                //Update chat log with message
+                UpdateChatLog(message);
+            }//end of while loop
+        }//end of ReceiveMessages()
+
+        private void UpdateChatLog()
+        {
+
+
+        }//end of UpdateChatLog()
+
+
+    }//end of public partial class Form1
+} //end of namespace
