@@ -71,7 +71,15 @@ namespace MulticastChat
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
+            //Construct message and convert to bytes
+            string message = userName + ": " + txtMessage.Text;
+            byte[] messageBytes = Encoding.ASCII.GetBytes(message);
 
+            //Send message to multicast group
+            udpClient.Send(messageBytes, messageBytes.Length, multicastEndPoint);
+
+            //Clear message text box
+            txtMessage.Text = "";
         }
 
         private void ReceiveMessages()
@@ -93,6 +101,8 @@ namespace MulticastChat
                 byte[] messageBytes = udpClient.Receive(ref remoteEndPoint);
 
                 //Convert message to string
+                //The Encoding.ASCII class provides methods for converting strings to
+                //and from ASCII-encoded byte arrays
                 string message = Encoding.ASCII.GetString(messageBytes);
 
                 //Update chat log with message
