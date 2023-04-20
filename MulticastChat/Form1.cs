@@ -74,12 +74,23 @@ namespace MulticastChat
             //Construct message and convert to bytes
             //userName the name of the user sending the message
             string message = userName + ": " + txtMessage.Text;
+
+            //The GetBytes method of the Encoding.ASCII class is used to convert the message to a byte array.
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
 
             //Send message to multicast group
+            //The messageBytes byte array contains the message data
+            //messageBytes.Length specifies the length of the message data in bytes
+            //multicastEndPoint variable specifies the IP endpoint of the multicast group to which
+            //the message should be sent.
             udpClient.Send(messageBytes, messageBytes.Length, multicastEndPoint);
+            //Overall, this code constructs a message string from the user's name and the text entered in a text box,
+            //encodes the message as a byte array using ASCII encoding, and sends the message to the multicast
+            //group using the UdpClient class.
+
 
             //Clear message text box
+            //line clears the text box containing the message text, so that the user can enter a new message.
             txtMessage.Text = "";
         }
 
@@ -111,12 +122,34 @@ namespace MulticastChat
             }//end of while loop
         }//end of ReceiveMessages()
 
-        private void UpdateChatLog()
+        private void UpdateChatLog(string message)
         {
+            if (txtChat.InvokeRequired)
+            {
+                //Invoke UpdateChatlog on UI thread
+                Invoke(new Action(() => UpdateChatLog(message)));
+            }
+            else
+            {
+                //Append message to chat log
+                txtChat.AppendText(message + "\r\n");
+            }    
 
 
         }//end of UpdateChatLog()
 
+        private void timerHeartbeat_Tick(object sender, EventArgs e)
+        {
+            //Send message to multicast group
+            string message = 
+
+        }
+
+        private void UpdateUserList(string[] userList)
+        {
+
+
+        }
 
     }//end of public partial class Form1
 } //end of namespace

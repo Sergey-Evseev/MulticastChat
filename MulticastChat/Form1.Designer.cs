@@ -100,6 +100,10 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "ACTIVE USERS";
             // 
+            // timerHeartbeat
+            // 
+            this.timerHeartbeat.Tick += new System.EventHandler(this.timerHeartbeat_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
