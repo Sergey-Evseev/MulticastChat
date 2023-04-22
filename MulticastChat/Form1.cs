@@ -37,7 +37,8 @@ namespace MulticastChat
         private Thread receiveThread;
 
         //User name and heartbeat interval
-        //variable that will be used to store the name of the user or device that is sending the heartbeat messages.
+        //variable that will be used to store the name of the user or device
+        //that is sending the heartbeat messages.
         private string userName;
         //interval for sending heartbeat messages, in milliseconds
         private int heartbeatInterval = 5000;
@@ -47,19 +48,28 @@ namespace MulticastChat
         public Form1()
         {
             InitializeComponent();
+            timerHeartbeat.Interval = heartbeatInterval;
+            timerHeartbeat.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
+        {           
+            
             //Create UDP client and multicast endpoint
             udpClient = new UdpClient();
+            
             //join the client to the multicast group specified by the multicastAddress variable
             //This tells the operating system that the UDP client is interested in receiving
             //messages sent to the specified multicast group.
             udpClient.JoinMulticastGroup(multicastAddress);
+
             //This endpoint will be used to SEND and RECEIVE data to/from the multicast group
             //using the UdpClient.
             multicastEndPoint = new IPEndPoint(multicastAddress, multicastPort);
+
+            //fix of Bind exception
+            //UdpClient needs to be bound to a local port before it can receive messages.
+            udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, multicastPort));
 
             //Start thread for receiving messages
             //starts a new thread to run the ReceiveMessages method in the background
@@ -124,32 +134,55 @@ namespace MulticastChat
 
         private void UpdateChatLog(string message)
         {
+            //Свойство InvokeRequired проверяет, явл. ли текущий поток потоком,
+            //создавшим элемент управления текстбокс txtChat.
+            //Если это не так, то к элементу управления нельзя получить доступ непосредственно
+            //из текущего потока, поэтому к нему нужно обратиться из потока пользовательского интерфейса.
+            //Метод Invoke ставит делегат в очередь на выполнение в потоке, который создал элемент управления.
             if (txtChat.InvokeRequired)
             {
                 //Invoke UpdateChatlog on UI thread
                 Invoke(new Action(() => UpdateChatLog(message)));
             }
+
+            //Если текущим потоком является поток пользовательского интерфейса, метод добавляет сообщение
+            //в журнал чата, вызывая метод AppendText элемента управления txtChat
             else
             {
                 //Append message to chat log
                 txtChat.AppendText(message + "\r\n");
-            }    
-
-
+            }
         }//end of UpdateChatLog()
 
+        //In the timerHeartbeat_Tick method, we construct a heartbeat message indicating
+        //that the user is online and send it to the multicast group using the udpClient.
         private void timerHeartbeat_Tick(object sender, EventArgs e)
         {
             //Send message to multicast group
-            string message = 
+            string message = userName + " (online)";
+            byte[] messageBytes = Encoding.ASCII.GetBytes(message);
+            udpClient.Send(messageBytes, message.Length, multicastEndPoint);
 
         }
 
         private void UpdateUserList(string[] userList)
         {
+            if (lstUsers.InvokeRequired)
+            {
+                // Invoke UpdateUserList on UI thread
+                Invoke(new Action(() => UpdateUserList(userList)));
+            }
+            else
+            {
+                // Clear user list and add active users
+                lstUsers.Items.Clear();
 
+                foreach (string user in userList)
+                {
+                    lstUsers.Items.Add(user);
+                }
+            }
 
         }
-
     }//end of public partial class Form1
-} //end of namespace
+ } //end of namespace
