@@ -68,9 +68,9 @@
             // lstUsers
             // 
             this.lstUsers.FormattingEnabled = true;
-            this.lstUsers.Location = new System.Drawing.Point(431, 53);
+            this.lstUsers.Location = new System.Drawing.Point(411, 27);
             this.lstUsers.Name = "lstUsers";
-            this.lstUsers.Size = new System.Drawing.Size(418, 199);
+            this.lstUsers.Size = new System.Drawing.Size(166, 186);
             this.lstUsers.TabIndex = 3;
             // 
             // label1
@@ -94,7 +94,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(598, 27);
+            this.label3.Location = new System.Drawing.Point(445, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 13);
             this.label3.TabIndex = 6;
@@ -108,7 +108,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(888, 441);
+            this.ClientSize = new System.Drawing.Size(608, 410);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
