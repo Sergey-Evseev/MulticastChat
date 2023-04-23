@@ -16,5 +16,10 @@ namespace MulticastChat
         {
             InitializeComponent();
         }
+
+        public string UserName
+        {
+            get { return txtUserName.Text; }
+        }
     }
 }

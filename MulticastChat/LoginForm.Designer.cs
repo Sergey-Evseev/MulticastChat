@@ -34,14 +34,14 @@
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(90, 55);
+            this.txtUserName.Location = new System.Drawing.Point(51, 39);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(297, 20);
+            this.txtUserName.Size = new System.Drawing.Size(239, 20);
             this.txtUserName.TabIndex = 0;
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(215, 121);
+            this.btnLogin.Location = new System.Drawing.Point(143, 111);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.TabIndex = 1;
@@ -52,7 +52,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 199);
+            this.ClientSize = new System.Drawing.Size(345, 185);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtUserName);
             this.Name = "LoginForm";

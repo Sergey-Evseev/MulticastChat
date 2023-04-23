@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Runtime.InteropServices;
+using static System.Windows.Forms.AxHost;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Reflection;
 
 namespace MulticastChat
 {
@@ -50,14 +53,21 @@ namespace MulticastChat
             InitializeComponent();
             timerHeartbeat.Interval = heartbeatInterval;
             timerHeartbeat.Start();
+            //Create an instance of the LoginForm and display it as a modal dialog.
+            //If the user clicks the "btnLogin" button, the DialogResult will be set to OK and
+            //we can retrieve the username from the TextBox "txtUserName" on the LoginForm and store it in the "userName" field.
+            var loginForm = new LoginForm();
+            if(loginForm.ShowDialog() == DialogResult.OK)
+            {
+                userName = loginForm.UserName;
+            }    
         }
-
         private void Form1_Load(object sender, EventArgs e)
-        {           
-            
+        {
+
             //Create UDP client and multicast endpoint
             udpClient = new UdpClient();
-            
+
             //join the client to the multicast group specified by the multicastAddress variable
             //This tells the operating system that the UDP client is interested in receiving
             //messages sent to the specified multicast group.
