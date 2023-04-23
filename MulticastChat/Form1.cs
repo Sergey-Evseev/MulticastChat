@@ -14,6 +14,8 @@ using System.Runtime.InteropServices;
 using static System.Windows.Forms.AxHost;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Reflection;
+using Microsoft.VisualBasic;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace MulticastChat
 {
@@ -53,17 +55,11 @@ namespace MulticastChat
             InitializeComponent();
             timerHeartbeat.Interval = heartbeatInterval;
             timerHeartbeat.Start();
-            //Create an instance of the LoginForm and display it as a modal dialog.
-            //If the user clicks the "btnLogin" button, the DialogResult will be set to OK and
-            //we can retrieve the username from the TextBox "txtUserName" on the LoginForm and store it in the "userName" field.
-            var loginForm = new LoginForm();
-            if(loginForm.ShowDialog() == DialogResult.OK)
-            {
-                userName = loginForm.UserName;
-            }    
-        }
+
+        } //end of public Form1()
         private void Form1_Load(object sender, EventArgs e)
         {
+            userName = Interaction.InputBox("Please enter your user name:", "User Name", "");
 
             //Create UDP client and multicast endpoint
             udpClient = new UdpClient();
@@ -87,7 +83,7 @@ namespace MulticastChat
             //in the new thread.  In this case, the delegate is created using the ThreadStart
             //constructor, which takes a reference to the ReceiveMessages method.
             receiveThread = new Thread(new ThreadStart(ReceiveMessages));
-            receiveThread.Start();
+            receiveThread.Start();   
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
@@ -172,27 +168,16 @@ namespace MulticastChat
             string message = userName + " (online)";
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
             udpClient.Send(messageBytes, message.Length, multicastEndPoint);
-
+            UpdateUserList(userName);
         }
 
-        private void UpdateUserList(string[] userList)
+        private void UpdateUserList(string user)
         {
-            if (lstUsers.InvokeRequired)
-            {
-                // Invoke UpdateUserList on UI thread
-                Invoke(new Action(() => UpdateUserList(userList)));
-            }
-            else
-            {
-                // Clear user list and add active users
-                lstUsers.Items.Clear();
+            // Clear existing items in the ListBox
+            lstUsers.Items.Clear();
 
-                foreach (string user in userList)
-                {
-                    lstUsers.Items.Add(user);
-                }
-            }
-
+            // Add new item to the ListBox
+            lstUsers.Items.Add(user);
         }
     }//end of public partial class Form1
  } //end of namespace
