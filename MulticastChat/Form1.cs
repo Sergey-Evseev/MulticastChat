@@ -39,7 +39,7 @@ namespace MulticastChat
         //User name and heartbeat interval
         //variable that will be used to store the name of the user or device
         //that is sending the heartbeat messages.
-        private string userName;
+        private string userName = "";
         //interval for sending heartbeat messages, in milliseconds
         private int heartbeatInterval = 5000;
 
