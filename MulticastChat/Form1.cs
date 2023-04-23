@@ -95,7 +95,9 @@ namespace MulticastChat
         {
             //Construct message and convert to bytes
             //userName the name of the user sending the message
-            string message = userName + ": " + txtMessage.Text;
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string message = $"{timestamp} : {userName}: {txtMessage.Text}";
+                        
 
             //The GetBytes method of the Encoding.ASCII class is used to convert the message to a byte array.
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
@@ -171,10 +173,11 @@ namespace MulticastChat
         private void timerHeartbeat_Tick(object sender, EventArgs e)
         {
             //Send message to multicast group
-            string message = userName + " (online)";
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string message = $"{timestamp} - {userName} (online)";
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
             udpClient.Send(messageBytes, message.Length, multicastEndPoint);
-            UpdateUserList(userName);
+            UpdateUserList(message);
         }
 
         private void UpdateUserList(string user)
