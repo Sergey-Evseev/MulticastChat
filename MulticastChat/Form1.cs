@@ -1,4 +1,4 @@
-﻿/*С использование схемы маршрутизации multicast, реализуйте без серверный чат 
+﻿/*Lesson 5. С использование схемы маршрутизации multicast, реализуйте без серверный чат 
 с графическим пользовательским интерфейсом. То есть такой чат, которому
 не нужен сервер, и который отправлял бы сообщения только тем компьютерам, 
 которые его ожидают. Так же предусмотрите возможность мониторинга пользователей,
@@ -177,16 +177,16 @@ namespace MulticastChat
             string message = $"{timestamp} - {userName} (online)";
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
             udpClient.Send(messageBytes, message.Length, multicastEndPoint);
-            UpdateUserList(message);
+            //UpdateUserList(message);
         }
 
-        private void UpdateUserList(string user)
+        private void UpdateUserList(string userMessage)
         {
             // Clear existing items in the ListBox
             lstUsers.Items.Clear();
 
             // Add new item to the ListBox
-            lstUsers.Items.Add(user);
+            lstUsers.Items.Add(userMessage);
         }
     }//end of public partial class Form1
- } //end of namespace
+ } //end of namespace MulticastChat
