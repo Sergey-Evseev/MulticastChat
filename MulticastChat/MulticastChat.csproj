@@ -90,5 +90,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Hopstarter-Sleek-Xp-Software-Windows-Messenger.ico" />
+    <Content Include="Resources\Iconshock-Real-Vista-Communications-Voice-chat.256.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

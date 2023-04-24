@@ -79,7 +79,7 @@ namespace MulticastChat
             //using the UdpClient.
             multicastEndPoint = new IPEndPoint(multicastAddress, multicastPort);
 
-            //fix of Bind exception
+            //Fix of Bind exception
             //UdpClient needs to be bound to a local port before it can receive messages.
             udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, multicastPort));
 
@@ -141,8 +141,22 @@ namespace MulticastChat
                 //and from ASCII-encoded byte arrays
                 string message = Encoding.ASCII.GetString(messageBytes);
 
-                //Update chat log with message
-                UpdateChatLog(message);
+                //Check if message is a heartbeat message
+                if (message.StartsWith("heartbeat"))
+                {
+                    //This code splits a string message using the colon character (":") as the delimiter
+                    //and stores the resulting substrings in an array called messageParts.
+                    string[] messageParts = message.Split('|');
+                    // retrieves the second substring from the messageParts array
+                    string username = messageParts[1];
+
+                    UpdateUserList(username);
+                }    
+                else
+                {
+                    //Update chat log with message
+                    UpdateChatLog(message);
+                }                
             }//end of while loop
         }//end of ReceiveMessages()
 
@@ -174,7 +188,7 @@ namespace MulticastChat
         {
             //Send message to multicast group
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string message = $"{timestamp} - {userName} (online)";
+            string message = $"heartbeat| {timestamp} - {userName} (online)";
             byte[] messageBytes = Encoding.ASCII.GetBytes(message);
             udpClient.Send(messageBytes, message.Length, multicastEndPoint);
             //UpdateUserList(message);

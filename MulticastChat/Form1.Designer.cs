@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.txtChat = new System.Windows.Forms.TextBox();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
@@ -52,12 +53,12 @@
             this.txtMessage.Location = new System.Drawing.Point(35, 258);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(355, 66);
+            this.txtMessage.Size = new System.Drawing.Size(355, 48);
             this.txtMessage.TabIndex = 1;
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(89, 361);
+            this.btnSend.Location = new System.Drawing.Point(89, 338);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(240, 23);
             this.btnSend.TabIndex = 2;
@@ -70,7 +71,7 @@
             this.lstUsers.FormattingEnabled = true;
             this.lstUsers.Location = new System.Drawing.Point(411, 27);
             this.lstUsers.Name = "lstUsers";
-            this.lstUsers.Size = new System.Drawing.Size(166, 186);
+            this.lstUsers.Size = new System.Drawing.Size(293, 186);
             this.lstUsers.TabIndex = 3;
             // 
             // label1
@@ -108,7 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 410);
+            this.ClientSize = new System.Drawing.Size(731, 389);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -116,6 +117,7 @@
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.txtChat);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "LOCAL CHAT";
             this.Load += new System.EventHandler(this.Form1_Load);
