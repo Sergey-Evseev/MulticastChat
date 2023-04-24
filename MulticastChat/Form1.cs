@@ -204,7 +204,7 @@ namespace MulticastChat
         private void UpdateUserList(string userMessage)
         {
             // Clear existing items in the ListBox
-            lstUsers.Items.Clear();
+            //lstUsers.Items.Clear();
 
             // Add new item to the ListBox
             lstUsers.Items.Add(userMessage);
@@ -254,6 +254,15 @@ namespace MulticastChat
 
             // Stop the application
             Application.Exit();
+        }
+
+        private void txtMessage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true; // prevent the enter key from being processed by the textbox
+                btnSend.PerformClick(); // simulate a click on the send button
+            }
         }
     }//end of public partial class Form1
  } //end of namespace MulticastChat
