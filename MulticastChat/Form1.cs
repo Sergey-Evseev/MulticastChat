@@ -210,7 +210,7 @@ namespace MulticastChat
             //Add new item to the ListBox
             lstUsers.Items.Add(userMessage);
             //last items at the bottom of the ListBox
-            lstUsers.TopIndex = lstUsers.Items.Count - 1;
+            //lstUsers.TopIndex = lstUsers.Items.Count - 1;
         }
 
         private void btnSetChatColor_Click(object sender, EventArgs e)
