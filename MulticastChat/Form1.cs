@@ -210,7 +210,7 @@ namespace MulticastChat
             //Add new item to the ListBox
             lstUsers.Items.Add(userMessage);
             //last items at the bottom of the ListBox
-            //lstUsers.TopIndex = lstUsers.Items.Count - 1;
+            lstUsers.TopIndex = lstUsers.Items.Count - 1;
         }
 
         private void btnSetChatColor_Click(object sender, EventArgs e)
@@ -258,7 +258,7 @@ namespace MulticastChat
             // Stop the application
             Application.Exit();
         }
-
+                
         private void txtMessage_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
