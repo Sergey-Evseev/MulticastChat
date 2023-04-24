@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.timerHeartbeat = new System.Windows.Forms.Timer(this.components);
+            this.btnSetColor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtChat
@@ -105,11 +106,22 @@
             // 
             this.timerHeartbeat.Tick += new System.EventHandler(this.timerHeartbeat_Tick);
             // 
+            // btnSetColor
+            // 
+            this.btnSetColor.Location = new System.Drawing.Point(499, 231);
+            this.btnSetColor.Name = "btnSetColor";
+            this.btnSetColor.Size = new System.Drawing.Size(134, 23);
+            this.btnSetColor.TabIndex = 7;
+            this.btnSetColor.Text = "SET COLOR";
+            this.btnSetColor.UseVisualStyleBackColor = true;
+            this.btnSetColor.Click += new System.EventHandler(this.btnSetColor_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(731, 389);
+            this.Controls.Add(this.btnSetColor);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -136,6 +148,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Timer timerHeartbeat;
+        private System.Windows.Forms.Button btnSetColor;
     }
 }
 

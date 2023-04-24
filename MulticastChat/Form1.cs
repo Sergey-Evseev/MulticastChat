@@ -67,6 +67,9 @@ namespace MulticastChat
         {
             userName = Interaction.InputBox("Please enter your user name:", "User Name", "");
 
+           //do chat text box inaccessible programatically
+            txtChat.Enabled = false;
+
             //Create UDP client and multicast endpoint
             udpClient = new UdpClient();
 
@@ -89,7 +92,32 @@ namespace MulticastChat
             //in the new thread.  In this case, the delegate is created using the ThreadStart
             //constructor, which takes a reference to the ReceiveMessages method.
             receiveThread = new Thread(new ThreadStart(ReceiveMessages));
-            receiveThread.Start();   
+            receiveThread.Start();            
+        }
+
+        private void btnSetColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            //if (colorDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    Color selectedColor = colorDialog.Color;
+            //    // Use the selected color for font or background color of the text box
+            //}
+
+
+            // Display a color dialog box to let the user choose the font color
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Set the font color of the txtChat control
+                txtChat.ForeColor = colorDialog.Color;
+            }
+
+            // Display a color dialog box to let the user choose the background color
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Set the background color of the txtChat control
+                txtChat.BackColor = colorDialog.Color;
+            }
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
@@ -202,5 +230,7 @@ namespace MulticastChat
             // Add new item to the ListBox
             lstUsers.Items.Add(userMessage);
         }
+
+        
     }//end of public partial class Form1
  } //end of namespace MulticastChat
