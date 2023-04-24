@@ -95,30 +95,7 @@ namespace MulticastChat
             receiveThread.Start();            
         }
 
-        private void btnSetColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog colorDialog = new ColorDialog();
-            //if (colorDialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    Color selectedColor = colorDialog.Color;
-            //    // Use the selected color for font or background color of the text box
-            //}
-
-
-            // Display a color dialog box to let the user choose the font color
-            if (colorDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Set the font color of the txtChat control
-                txtChat.ForeColor = colorDialog.Color;
-            }
-
-            // Display a color dialog box to let the user choose the background color
-            if (colorDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Set the background color of the txtChat control
-                txtChat.BackColor = colorDialog.Color;
-            }
-        }
+        
         private void btnSend_Click(object sender, EventArgs e)
         {
             //Construct message and convert to bytes
@@ -231,6 +208,49 @@ namespace MulticastChat
             lstUsers.Items.Add(userMessage);
         }
 
-        
+        private void btnSetChatColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Set the background color of the txtChat control
+                txtChat.BackColor = colorDialog.Color;
+            }
+        }
+
+        private void btnSetFontColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog1 = new ColorDialog();
+
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Set the font color of the txtChat control
+                txtChat.ForeColor = colorDialog1.Color;
+            }
+        }
+
+        private void btnSetFontSize_Click(object sender, EventArgs e)
+        {
+            // Display a font dialog box to let the user choose the font and size
+            FontDialog fontDialog1 = new FontDialog();
+
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Set the font size of the txtChat control
+                txtChat.Font = new Font(txtChat.Font.FontFamily, fontDialog1.Font.Size);
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            // Stop receiving thread
+            receiveThread?.Abort();
+
+            // Close UDP client
+            udpClient?.Close();
+        }
     }//end of public partial class Form1
  } //end of namespace MulticastChat
