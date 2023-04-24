@@ -21,10 +21,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Reflection;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.ApplicationServices;
+using MetroFramework;
+using MetroFramework.Forms;
 
 namespace MulticastChat
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroForm
     {
         //Multicast group address and port number
         //The multicast address 239.0.0.1 is a reserved address used for "all hosts
@@ -83,7 +85,7 @@ namespace MulticastChat
             //UdpClient needs to be bound to a local port before it can receive messages.
             udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, multicastPort));
 
-            //запуск таймера с заданным интервалом
+            //запуск таймера с заданным интервалом (после создания udpClient)
             timerHeartbeat.Interval = heartbeatInterval;
             timerHeartbeat.Start();
 
@@ -202,12 +204,13 @@ namespace MulticastChat
         }
 
         private void UpdateUserList(string userMessage)
-        {
-            // Clear existing items in the ListBox
+        {            
             //lstUsers.Items.Clear();
 
-            // Add new item to the ListBox
+            //Add new item to the ListBox
             lstUsers.Items.Add(userMessage);
+            //last items at the bottom of the ListBox
+            lstUsers.TopIndex = lstUsers.Items.Count - 1;
         }
 
         private void btnSetChatColor_Click(object sender, EventArgs e)

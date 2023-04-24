@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.txtChat = new System.Windows.Forms.TextBox();
-            this.txtMessage = new System.Windows.Forms.TextBox();
+            this.txtChat = new MetroFramework.Controls.MetroTextBox();
+            this.txtMessage = new MetroFramework.Controls.MetroTextBox();
             this.btnSend = new System.Windows.Forms.Button();
             this.lstUsers = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -173,8 +173,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtChat;
-        private System.Windows.Forms.TextBox txtMessage;
+        private MetroFramework.Controls.MetroTextBox txtChat;
+        private MetroFramework.Controls.MetroTextBox txtMessage;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.ListBox lstUsers;
         private System.Windows.Forms.Label label1;
