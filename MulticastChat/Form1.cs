@@ -1,8 +1,7 @@
 ﻿/*Lesson 5. С использование схемы маршрутизации multicast, реализуйте без серверный чат 
-с графическим пользовательским интерфейсом. То есть такой чат, которому
-не нужен сервер, и который отправлял бы сообщения только тем компьютерам, 
-которые его ожидают. Так же предусмотрите возможность мониторинга пользователей,
-находящихся онлайн.*/
+с графическим пользовательским интерфейсом. То есть такой чат, которому не нужен сервер, 
+и который отправлял бы сообщения только тем компьютерам, которые его ожидают. 
+Так же предусмотрите возможность мониторинга пользователей, находящихся онлайн.*/
 
 using System;
 using System.Collections.Generic;
@@ -58,9 +57,7 @@ namespace MulticastChat
 
         public Form1()
         {
-            InitializeComponent();
-            timerHeartbeat.Interval = heartbeatInterval;
-            timerHeartbeat.Start();
+            InitializeComponent();            
 
         } //end of public Form1()
         private void Form1_Load(object sender, EventArgs e)
@@ -85,6 +82,10 @@ namespace MulticastChat
             //Fix of Bind exception
             //UdpClient needs to be bound to a local port before it can receive messages.
             udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, multicastPort));
+
+            //запуск таймера с заданным интервалом
+            timerHeartbeat.Interval = heartbeatInterval;
+            timerHeartbeat.Start();
 
             //Start thread for receiving messages
             //starts a new thread to run the ReceiveMessages method in the background
@@ -195,7 +196,7 @@ namespace MulticastChat
             //Send message to multicast group
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string message = $"heartbeat| {timestamp} - {userName} (online)";
-            byte[] messageBytes = Encoding.ASCII.GetBytes(message);
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
             udpClient.Send(messageBytes, message.Length, multicastEndPoint);
             //UpdateUserList(message);
         }
