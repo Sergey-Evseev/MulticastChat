@@ -242,15 +242,16 @@ namespace MulticastChat
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            base.OnFormClosing(e);
+            // Stop the receive thread
+            receiveThread.Abort();
 
-            // Stop receiving thread
-            receiveThread?.Abort();
+            // Close the UDP client
+            udpClient.Close();
 
-            // Close UDP client
-            udpClient?.Close();
+            // Stop the application
+            Application.Exit();
         }
     }//end of public partial class Form1
  } //end of namespace MulticastChat
