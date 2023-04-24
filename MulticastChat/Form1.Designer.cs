@@ -47,7 +47,7 @@
             // 
             this.txtChat.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtChat.ForeColor = System.Drawing.Color.Lime;
-            this.txtChat.Location = new System.Drawing.Point(35, 27);
+            this.txtChat.Location = new System.Drawing.Point(28, 27);
             this.txtChat.Multiline = true;
             this.txtChat.Name = "txtChat";
             this.txtChat.Size = new System.Drawing.Size(355, 186);
@@ -56,7 +56,7 @@
             // txtMessage
             // 
             this.txtMessage.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.txtMessage.Location = new System.Drawing.Point(35, 258);
+            this.txtMessage.Location = new System.Drawing.Point(27, 258);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(355, 48);
@@ -64,7 +64,7 @@
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(89, 338);
+            this.btnSend.Location = new System.Drawing.Point(83, 338);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(240, 23);
             this.btnSend.TabIndex = 2;
@@ -159,6 +159,8 @@
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.txtChat);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(747, 427);
+            this.MinimumSize = new System.Drawing.Size(426, 427);
             this.Name = "Form1";
             this.Text = "LOCAL CHAT";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);

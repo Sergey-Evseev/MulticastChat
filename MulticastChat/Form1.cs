@@ -105,7 +105,7 @@ namespace MulticastChat
                         
 
             //The GetBytes method of the Encoding.ASCII class is used to convert the message to a byte array.
-            byte[] messageBytes = Encoding.ASCII.GetBytes(message);
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
 
             //Send message to multicast group
             //The messageBytes byte array contains the message data
@@ -120,7 +120,7 @@ namespace MulticastChat
 
             //Clear message text box
             //line clears the text box containing the message text, so that the user can enter a new message.
-            txtMessage.Text = "";
+            txtMessage.Clear();
         }
 
         private void ReceiveMessages()
@@ -144,7 +144,8 @@ namespace MulticastChat
                 //Convert message to string
                 //The Encoding.ASCII class provides methods for converting strings to
                 //and from ASCII-encoded byte arrays
-                string message = Encoding.ASCII.GetString(messageBytes);
+                //UTF-8 is a common encoding that supports a wide range of characters, including Cyrillic
+                string message = Encoding.UTF8.GetString(messageBytes);
 
                 //Check if message is a heartbeat message
                 if (message.StartsWith("heartbeat"))
